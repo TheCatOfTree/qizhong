@@ -12,14 +12,16 @@ public class MonsterBezueFire : MonoBehaviour
     public Transform target;
     public float r = 10;
     private float lasttime;
-    private float firetime = 0.02f;
+    private float firetime =3f;
     private GameObject father;
+    private Animator _animator;
     // Start is called before the first frame update
     void Start()
     {
         objectPool = ObjectPool.Instance;
         father = transform.parent.gameObject;
         lasttime = Time.time;
+        _animator = transform.parent.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,14 +29,20 @@ public class MonsterBezueFire : MonoBehaviour
     {
         if (father.gameObject.tag == "finding")
         {
-            if(lasttime+firetime<Time.time)
+            if (lasttime + firetime < Time.time)
             {
                 lasttime = Time.time;
+
+                _animator.SetBool("attack", true);
                 StartFire();
                 StartFire();
-               
+
             }
-           
+            else
+            {
+                _animator.SetBool("attack", false);
+
+            }
         }
     }
 
