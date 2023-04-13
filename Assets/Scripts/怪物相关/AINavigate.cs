@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class AINavigate : MonoBehaviour
 {
     private Transform Player;
-    private Animation animation;
+    private new Animation animation;
     public Slider _slider;
 
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
     private float Radius;
     private float speed;
     private bool i = false;
@@ -19,7 +19,7 @@ public class AINavigate : MonoBehaviour
 
     void Start()
     {
-        
+
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         animation = GetComponent<Animation>();
         rigidbody = GetComponent<Rigidbody>();
@@ -29,7 +29,8 @@ public class AINavigate : MonoBehaviour
 
     void Update()
     {
-        if (_slider.value>0.1f) {
+        if (_slider.value > 0.1f)
+        {
             if (gameObject.tag == "finding")
                 MoveToPlayer();
             if (gameObject.tag == "unfinding")
@@ -47,7 +48,7 @@ public class AINavigate : MonoBehaviour
                 if (distance < Radius)
                 {
                     animation.Play("fly");
-                    i= true;
+                    i = true;
                     transform.LookAt(Player.position);
                     if (transform.position.y < 3.5)
                     {
@@ -60,12 +61,11 @@ public class AINavigate : MonoBehaviour
 
     }
 
-    private void Stop() 
+    private void Stop()
     {
-        if(i)
-        animation.Play("landing");
-        i= false;
+        if (i)
+            animation.Play("landing");
+        i = false;
         rigidbody.velocity = Vector3.zero;
     }
-    
 }
